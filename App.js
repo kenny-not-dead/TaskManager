@@ -17,14 +17,18 @@ export default function App() {
         }
       ])
     }
-  
+
+    const removeTodo = id => {
+      setTodos(prev => prev.filter(todo => todo.id !==id))
+    }
+
 
   return (
     <View style={styles.container}>
       <Navbar title='To do App'/>
-      <View>
+      <View style={styles.content}>
         <AddTodo onSubmit={addTodo} />
-        <FlatList keyExtractor= {item =>item.id.toString()} data={todos} renderItem ={({item}) => ( <Todo todo={item}/>)}/>
+        <FlatList keyExtractor= {item =>item.id.toString()} data={todos} renderItem ={({item}) => ( <Todo todo={item} onRemove={removeTodo}/>)}/>
       </View>
       <StatusBar style="auto" />
     </View>
@@ -37,4 +41,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
   },
+
+  content: {
+    margin: 10
+  }
 });
