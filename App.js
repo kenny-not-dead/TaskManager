@@ -35,7 +35,7 @@ export default function App() {
     function ScreenA ({navigation}) {
 
     const onPressHandler = () => {
-      navigation.navigate('Screen_B');
+      navigation.navigate('Add_todo');
     }
       return(
             <View style={styles.container}>
@@ -53,7 +53,7 @@ export default function App() {
     }
     
 
-    function ScreenB () {
+    function AddTodoForm () {
       return(
             <View style={styles.container}>
                 <AddTodo onSubmit={addTodo} />
@@ -72,8 +72,8 @@ export default function App() {
               }}
            />   
                       <Stack.Screen
-              name='Screen_B'
-              component={ScreenB}   
+              name='Add_todo'
+              component={AddTodoForm}   
            />   
       </Stack.Navigator>
   </NavigationContainer>
