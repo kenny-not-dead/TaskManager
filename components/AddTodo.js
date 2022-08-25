@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Button, View, TextInput } from 'react-native';
 
+
 export const AddTodo = ({onSubmit}) => {
     const [value, setValue] = useState (' ')
 
@@ -49,5 +50,3 @@ const styles = StyleSheet.create({
     }
 });
 
-
-//onPress={()} => (todo.id)} onLongPress = {onRemove.bind (null, todo.id)}, передать в todo onRemove
