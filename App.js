@@ -22,9 +22,11 @@ export default function App() {
         {
           id: Date.now().toString(),
           title,
+          active: 'Active'
         }
       ])
     }
+    
 
     const removeTodo = id => {
       setTodos(prev => prev.filter(todo => todo.id !==id))
@@ -32,18 +34,21 @@ export default function App() {
 
 
 
-    function ScreenA ({navigation}) {
+    function ToDoList ({navigation}) {
 
     const onPressHandler = () => {
       navigation.navigate('Add_todo');
     }
+
       return(
             <View style={styles.container}>
                 <Navbar title='To do App'/>
-                  <View style={styles.content}>
-                    <FlatList keyExtractor= {item =>item.id.toString()} data={todos} renderItem ={({item}) => ( <Todo todo={item} onRemove={removeTodo}/>)}/>
-                  </View>
-                <StatusBar style="auto" />
+                   <View style={styles.containerContent}>
+                        <View style={styles.content}>
+                          <FlatList keyExtractor= {item =>item.id.toString()} data={todos} renderItem ={({item}) => ( <Todo todo={item} onRemove={removeTodo}/>)}/>
+                        </View>
+                      <StatusBar style="auto" />
+                    </View>
                 <Pressable
                    onPress={onPressHandler}>
                   <Text style={styles.add}> + </Text>
@@ -65,8 +70,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
            <Stack.Screen
-              name='Screen_A'
-              component={ScreenA}
+              name='ToDoList'
+              component={ToDoList}
               options={{
                 header: () => null
               }}
@@ -85,9 +90,15 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    
+  },
+
+  containerContent:{
+    backgroundColor: '#ECECEC'
   },
 
   content: {
+  
     margin: 10,
     height: '81%'
   },

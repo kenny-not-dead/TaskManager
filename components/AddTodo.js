@@ -15,7 +15,6 @@ export const AddTodo = ({onSubmit}) => {
   
     }
 
-
     return(
         <View style={styles.container}>
             <TextInput 
@@ -35,8 +34,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 20
-        
+        padding: 20,
     },
     input: {
         height: 40,
