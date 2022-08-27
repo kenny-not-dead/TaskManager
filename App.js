@@ -4,6 +4,7 @@ import { StyleSheet, FlatList, View, Text, ScrollView } from 'react-native';
 import { AddTodo } from './components/AddTodo';
 import { Navbar } from './components/Navbar';
 import { Todo } from './components/Todo';
+// import { Done } from './components/Done';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
@@ -37,7 +38,7 @@ export default function App() {
     function ToDoList ({navigation}) {
 
     const onPressHandler = () => {
-      navigation.navigate('Add_todo');
+      navigation.navigate('Add_todo'); 
     }
 
       return(
@@ -49,7 +50,7 @@ export default function App() {
                         </View>
                       <StatusBar style="auto" />
                     </View>
-                <Pressable
+                <Pressable  style={styles.bodyAdd}
                    onPress={onPressHandler}>
                   <Text style={styles.add}> + </Text>
                 </Pressable>
@@ -104,8 +105,16 @@ const styles = StyleSheet.create({
   },
 
   add: {
-    fontSize:50,
-    color: 'blue',
+    fontSize: 35,
+    color: 'white',
     textAlign: 'center',
+  },
+
+  bodyAdd:{
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    backgroundColor: 'grey',
+    elevation: 5
   }
 });

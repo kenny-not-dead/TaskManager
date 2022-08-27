@@ -3,7 +3,8 @@ import { StyleSheet, Button, View, TextInput } from 'react-native';
 
 
 export const AddTodo = ({onSubmit}) => {
-    const [value, setValue] = useState (' ')
+    const [value, setValue] = useState ('')
+    const [comment, setComment] = useState ('')
 
     const pressHand = () => {
         if (value.trim()) {
@@ -18,11 +19,19 @@ export const AddTodo = ({onSubmit}) => {
     return(
         <View style={styles.container}>
             <TextInput 
-            style={styles.input}
-            onChangeText={setValue}
             value={value}
+            style={styles.input}
             placeholder= "Введите дело"
-            />
+            onChangeText={setValue}
+            
+             />
+            <TextInput 
+            value={comment}
+            style={styles.input}
+            placeholder= "Комментарий"
+            onChangeText = {(value) => setComment(value)}
+            multiline
+             />
             <Button style={styles.button} title ='Добавить' onPress={pressHand}/>
         </View>
     );
@@ -32,16 +41,15 @@ export const AddTodo = ({onSubmit}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 20,
     },
     input: {
-        height: 40,
-        width: '65%',
+        width: '100%',
         borderBottomWidth: 1,
         borderColor: 'grey',
         padding: 10,
+        textAlign: 'left'
       },
     button: {
         textColor: 'red'
