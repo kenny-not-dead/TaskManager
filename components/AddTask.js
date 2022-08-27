@@ -1,28 +1,25 @@
 import { useState } from 'react';
-import { StyleSheet, Button, View, TextInput } from 'react-native';
+import React from 'react';
+import { Alert, StyleSheet, Button, View, TextInput } from 'react-native';
 
 
-export const AddTodo = ({onSubmit}) => {
-    const [value, setValue] = useState ('')
+export default function AddTask () {
+    const [title, setTitle] = useState ('')
     const [comment, setComment] = useState ('')
 
-    const pressHand = () => {
-        if (value.trim()) {
-            onSubmit(value)
-            setValue ('')
-        } else {
-            //
+    const setTask = () => {
+        if (title.length == 0) {
+           Alert.alert('Введите задачу') 
         }
-  
     }
 
     return(
         <View style={styles.container}>
             <TextInput 
-            value={value}
+            value={title}
             style={styles.input}
-            placeholder= "Введите дело"
-            onChangeText={setValue}
+            placeholder= "Задача"
+            onChangeText = {(value) => setTitle(value)}
             
              />
             <TextInput 
@@ -32,7 +29,7 @@ export const AddTodo = ({onSubmit}) => {
             onChangeText = {(value) => setComment(value)}
             multiline
              />
-            <Button style={styles.button} title ='Добавить' onPress={pressHand}/>
+            <Button style={styles.button} title ='Добавить' onPress={setTask}/>
         </View>
     );
 

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 
-export const Todo = ({todo, onRemove, onClickHandler}) => {
+export const Task = ({todo, onRemove, onClickHandler}) => {
 
     return(
         <TouchableOpacity
