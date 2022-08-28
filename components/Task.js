@@ -11,6 +11,9 @@ export default function Task(props) {
             <Text style={styles.text}>
                 {props.item.Comment}
             </Text>
+            <Text style={styles.text}>
+                {props.item.Player}
+            </Text>
         </TouchableOpacity>
     </View>
   )

@@ -12,6 +12,8 @@ export default function AddTask (navigation) {
 
     const [title, setTitle] = useState ('')
     const [comment, setComment] = useState ('')
+    const [player, setPlayer] = useState ('')
+
 
     const setTasks = () => {
         if (title.length == 0) {
@@ -21,7 +23,8 @@ export default function AddTask (navigation) {
                 var Task = {
                     ID: taskID,
                     Title: title, 
-                    Comment: comment
+                    Comment: comment,
+                    Player: player
                 }
                 let newTask = [...task, Task];
                 AsyncStorage.setItem('Task', JSON.stringify(newTask))
@@ -51,6 +54,13 @@ export default function AddTask (navigation) {
             style={styles.input}
             placeholder= "Комментарий"
             onChangeText = {(value) => setComment(value)}
+            multiline
+             />
+            <TextInput 
+            value={player}
+            style={styles.input}
+            placeholder= "Исполнитель"
+            onChangeText = {(value) => setPlayer(value)}
             multiline
              />
             <Button style={styles.button} title ='Добавить' onPress={setTasks}/>
