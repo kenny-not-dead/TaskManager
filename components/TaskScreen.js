@@ -3,17 +3,15 @@
 //import { Navbar } from './Navbar';
 //import { Task } from './Todo';
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { setTask, setTaskID } from '../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
-// FlatList, 
-
 export default function TaskScreen ({navigation}) {
     
-    const {task} = useSelector (state => state.taskReducer);sdf
+    const {task} = useSelector (state => state.taskReducer);
     const dispatch = useDispatch ();
 
     useEffect ( () => {
@@ -31,11 +29,19 @@ export default function TaskScreen ({navigation}) {
                 .catch(error => console.log(error))
     }
 
-
-
-
       return(
             <View>
+                <FlatList 
+                        data={task} renderItem ={({item}) => (
+                            <TouchableOpacity>
+                                <Text>
+                                    {item.Title}
+                                </Text>
+                                <Text>
+                                    {item.Comment}
+                                </Text>
+                            </TouchableOpacity>
+                        )} />
                 <Pressable  style={styles.bodyAdd}
                    onPress={() => {
                     dispatch(setTaskID(task.length + 1 ))
@@ -68,18 +74,5 @@ const styles = StyleSheet.create({
   });
   
 
-    /*
-            <View style={styles.container}>
-                <Navbar title='To do App'/>
-                   <View style={styles.containerContent}>
-                        <View style={styles.content}>
-                          <FlatList keyExtractor= {item =>item.id.toString()} data={todos} renderItem ={({item}) => ( <Todo todo={item} onRemove={removeTodo}/>)}/>
-                        </View>
-                      <StatusBar style="auto" />
-                    </View>
-                <Pressable  style={styles.bodyAdd}
-                   onPress={onPressHandler}>
-                  <Text style={styles.add}> + </Text>
-                </Pressable>
-            </View> 
-    */
+
+        //    ( <Todo todo={item} onRemove={removeTodo}/>)}/> Сделать компоненту для таски в отдельное окно, вызывать по типу как тут

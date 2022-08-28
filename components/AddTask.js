@@ -1,15 +1,39 @@
 import { useState } from 'react';
 import React from 'react';
 import { Alert, StyleSheet, Button, View, TextInput } from 'react-native';
+import {setTask} from '../redux/actions';
+import {useSelector, useDispatch} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export default function AddTask () {
+export default function AddTask (navigation) {
+    const {task, taskID} = useSelector (state => state.taskReducer);
+    const dispatch = useDispatch ();
+
     const [title, setTitle] = useState ('')
     const [comment, setComment] = useState ('')
 
-    const setTask = () => {
+    const setTasks = () => {
         if (title.length == 0) {
            Alert.alert('Введите задачу') 
+        } else {
+            try {
+                var Task = {
+                    ID: taskID,
+                    Title: title, 
+                    Comment: comment
+                }
+                let newTask = [...task, Task];
+                AsyncStorage.setItem('Task', JSON.stringify(newTask))
+                    .then(() => {
+                        dispatch(setTask(newTask));
+                        Alert.alert('Задача добавлена!');
+                        navigation.goBack ();
+                    }) 
+                    .catch(error => console.log(error))
+            } catch (error) {
+                console.log (error);
+            }
         }
     }
 
@@ -29,7 +53,7 @@ export default function AddTask () {
             onChangeText = {(value) => setComment(value)}
             multiline
              />
-            <Button style={styles.button} title ='Добавить' onPress={setTask}/>
+            <Button style={styles.button} title ='Добавить' onPress={setTasks}/>
         </View>
     );
 
