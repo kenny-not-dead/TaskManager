@@ -24,25 +24,33 @@ export default function Task(props) {
 
 const styles = StyleSheet.create({
     container: {
-    padding: 20,
-    margin: 5,
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: 'grey',
-    marginBottom: 10,
-    alignItems:  'center',
-    backgroundColor: 'white',
-    },
+        padding: 20,
+        margin: 5,
+        flexDirection: 'row',
+        borderWidth: 1,
+        borderColor: 'grey',
+        marginBottom: 10,
+        alignItems:  'center',
+        backgroundColor: 'white',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 4,
+        },
 
     title: {
         fontSize: 20,
-    },
+        },
 
     text: {
         marginTop: 15,
         fontSize: 14,
         color: '#838383'
-    }
+        }
 });
 
 

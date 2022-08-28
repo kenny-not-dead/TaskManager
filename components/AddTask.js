@@ -14,7 +14,9 @@ export default function AddTask (navigation) {
     const [title, setTitle] = useState ('')
     const [comment, setComment] = useState ('')
     const [player, setPlayer] = useState ('')
-    const [date, setDate] = useState('01-01-2022');
+    const [date, setDate] = useState('');
+
+
 
 
     const setTasks = () => {
@@ -70,9 +72,9 @@ export default function AddTask (navigation) {
                     <View style={styles.containerDate}>
                     <DatePicker
                     style={styles.datePickerStyle}
-                    date={date} // Initial date from state
-                    mode="date" // The enum of date, datetime and time
-                    placeholder="select date"
+                    date={date} 
+                    mode="date"
+                    placeholder="Срок исполнения"
                     format="DD-MM-YYYY"
                     minDate="01-01-2022"
                     maxDate="01-01-2030"
