@@ -9,7 +9,6 @@ import { setTask, setTaskID } from '../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 import Task from './Task';
-import Date from './Date';
 
 export default function TaskScreen ({navigation}) {
     
@@ -33,7 +32,6 @@ export default function TaskScreen ({navigation}) {
 
       return(
             <View>
-              <Date/>
                 <FlatList style={styles.containerTask}
                         data={task} renderItem ={({item}) => (
                            <Task item={item}/>
@@ -52,7 +50,6 @@ export default function TaskScreen ({navigation}) {
 const styles = StyleSheet.create({
     containerTask: {
         height: '85%',
-        marginTop: 100,
     },
 
     add: {

@@ -14,6 +14,9 @@ export default function Task(props) {
             <Text style={styles.text}>
                 {props.item.Player}
             </Text>
+            <Text style={styles.text}>
+                {props.item.Date}
+            </Text>
         </TouchableOpacity>
     </View>
   )

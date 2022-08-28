@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import React from 'react';
-import { Alert, StyleSheet, Button, View, TextInput } from 'react-native';
+import { Alert, StyleSheet, Button, View, TextInput, SafeAreaView } from 'react-native';
 import {setTask} from '../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DatePicker from 'react-native-datepicker';
 
 
 export default function AddTask (navigation) {
@@ -13,6 +14,7 @@ export default function AddTask (navigation) {
     const [title, setTitle] = useState ('')
     const [comment, setComment] = useState ('')
     const [player, setPlayer] = useState ('')
+    const [date, setDate] = useState('01-01-2022');
 
 
     const setTasks = () => {
@@ -24,7 +26,8 @@ export default function AddTask (navigation) {
                     ID: taskID,
                     Title: title, 
                     Comment: comment,
-                    Player: player
+                    Player: player,
+                    Date: date
                 }
                 let newTask = [...task, Task];
                 AsyncStorage.setItem('Task', JSON.stringify(newTask))
@@ -63,10 +66,39 @@ export default function AddTask (navigation) {
             onChangeText = {(value) => setPlayer(value)}
             multiline
              />
+             <SafeAreaView style={styles.container}>
+                    <View style={styles.containerDate}>
+                    <DatePicker
+                    style={styles.datePickerStyle}
+                    date={date} // Initial date from state
+                    mode="date" // The enum of date, datetime and time
+                    placeholder="select date"
+                    format="DD-MM-YYYY"
+                    minDate="01-01-2022"
+                    maxDate="01-01-2030"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                        dateIcon: {
+                        display: 'none',
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0,
+                        },
+                        dateInput: {
+                        //marginLeft: 5,
+                        },
+                    }}
+                    onDateChange={(date) => {
+                        setDate(date);
+                    }}
+                    />
+                </View>
+                </SafeAreaView>
             <Button style={styles.button} title ='Добавить' onPress={setTasks}/>
         </View>
     );
-
 }
 
 
@@ -84,6 +116,19 @@ const styles = StyleSheet.create({
       },
     button: {
         textColor: 'red'
-    }
-});
+    },
+
+    containerDate: {
+      },
+      title: {
+        textAlign: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+        padding: 20,
+      },
+      datePickerStyle: {
+        width: 200,
+        marginTop: 20,
+      },
+    });
 
