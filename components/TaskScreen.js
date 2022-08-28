@@ -3,11 +3,12 @@
 //import { Navbar } from './Navbar';
 //import { Task } from './Todo';
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, FlatList, ScrollView } from 'react-native';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { setTask, setTaskID } from '../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import Task from './Task';
 
 export default function TaskScreen ({navigation}) {
     
@@ -31,16 +32,9 @@ export default function TaskScreen ({navigation}) {
 
       return(
             <View>
-                <FlatList 
+                <FlatList style={styles.containerTask}
                         data={task} renderItem ={({item}) => (
-                            <TouchableOpacity>
-                                <Text>
-                                    {item.Title}
-                                </Text>
-                                <Text>
-                                    {item.Comment}
-                                </Text>
-                            </TouchableOpacity>
+                           <Task item={item}/>
                         )} />
                 <Pressable  style={styles.bodyAdd}
                    onPress={() => {
@@ -53,10 +47,11 @@ export default function TaskScreen ({navigation}) {
       )
     }
     
-
-    
 const styles = StyleSheet.create({
-  
+    containerTask: {
+        height: '85%'
+    },
+
     add: {
       fontSize: 35,
       color: 'white',
@@ -69,10 +64,8 @@ const styles = StyleSheet.create({
       borderRadius: 30,
       backgroundColor: 'grey',
       elevation: 5,
-      margin: 70
+      margin: 10,
+      justifyContent: 'center'
     }
   });
   
-
-
-        //    ( <Todo todo={item} onRemove={removeTodo}/>)}/> Сделать компоненту для таски в отдельное окно, вызывать по типу как тут

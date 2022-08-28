@@ -4,6 +4,7 @@
 import React from 'react';
 import AddTask from './components/AddTask';
 import TaskScreen from './components/TaskScreen';
+import { Navbar } from './components/Navbar';
 // import { Done } from './components/Done';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -15,6 +16,7 @@ const RootStack = createStackNavigator();
 export default function App() {
   return (
     <Provider store = {store}>
+      <Navbar title = {'Task Manager'}/>
           <NavigationContainer>
             <RootStack.Navigator>
                 <RootStack.Screen

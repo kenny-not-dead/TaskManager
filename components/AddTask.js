@@ -28,7 +28,7 @@ export default function AddTask (navigation) {
                     .then(() => {
                         dispatch(setTask(newTask));
                         Alert.alert('Задача добавлена!');
-                        navigation.goBack ();
+                        navigation.goBack(null);
                     }) 
                     .catch(error => console.log(error))
             } catch (error) {

@@ -1,6 +1,46 @@
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import React from 'react'
 
-export const Task = ({todo, onRemove, onClickHandler}) => {
+export default function Task(props) {
+  return (
+    <View style={styles.container}>
+       <TouchableOpacity>
+            <Text style={styles.title}>
+                {props.item.Title}
+            </Text>
+            <Text style={styles.text}>
+                {props.item.Comment}
+            </Text>
+        </TouchableOpacity>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+    container: {
+    padding: 20,
+    margin: 5,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: 'grey',
+    marginBottom: 10,
+    alignItems:  'center',
+    backgroundColor: 'white',
+    },
+
+    title: {
+        fontSize: 20,
+    },
+
+    text: {
+        marginTop: 15,
+        fontSize: 14,
+        color: '#838383'
+    }
+});
+
+
+/*
 
     return(
         <TouchableOpacity
@@ -16,25 +56,4 @@ export const Task = ({todo, onRemove, onClickHandler}) => {
 }
 
 
-const styles = StyleSheet.create({
-    container: {
-    padding: 30,
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: 'grey',
-    marginBottom: 10,
-    alignItems:  'center',
-    backgroundColor: 'white',
-},
-    active:{
-    color:'black',
-    padding: 5,
-    backgroundColor: '#48f542',
-    position: 'absolute',
-    marginHorizontal: 0,
-    top: 0,
-    right: 0,
-
-    }
-});
-
+*/
