@@ -1,6 +1,5 @@
 
-//import { useState } from 'react';
-//import { StyleSheet, FlatList, View, Text, ScrollView } from 'react-native';
+import { StatusBar } from 'react-native';
 import React from 'react';
 import AddTask from './components/AddTask';
 import TaskScreen from './components/TaskScreen';
@@ -16,6 +15,7 @@ const RootStack = createStackNavigator();
 export default function App() {
   return (
     <Provider store = {store}>
+      <StatusBar style='light-content' />
       <Navbar title = {'Task Manager'}/>
           <NavigationContainer>
             <RootStack.Navigator>

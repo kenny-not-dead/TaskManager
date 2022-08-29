@@ -51,6 +51,7 @@ export default function TaskScreen ({navigation}) {
 const styles = StyleSheet.create({
     containerTask: {
         height: '85%',
+        backgroundColor: '#EFEFEF'
     },
 
     add: {

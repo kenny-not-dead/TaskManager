@@ -27,22 +27,24 @@ const onRemove = (id) => {
         dispatch(setTaskID(props.item.ID));
         navigation.navigate('AddTask');
        }}>
-            <Text style={styles.title}>
-                {props.item.Title}
-            </Text>
+            <View style={styles.titledate}>
+                <Text style={styles.title}>
+                    {props.item.Title}
+                </Text>
+                <Text style={styles.date}>
+                    {props.item.Date}
+                </Text>
+           </View>
             <Text style={styles.text}>
                 {props.item.Comment}
             </Text>
-            <Text style={styles.text}>
+            <Text style={styles.player}>
                 {props.item.Player}
             </Text>
-            <Text style={styles.text}>
-                {props.item.Date}
-            </Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        <TouchableOpacity style={styles.delete}
         onPress={() => {onRemove(props.item.ID) }}>
-            <Text>Delete</Text>
+            <Text >Delete</Text>
         </TouchableOpacity>
     </View>
   )
@@ -70,12 +72,33 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 20,
+        width: '80%',
+        fontWeight: "bold"
         },
 
     text: {
-        marginTop: 15,
+        marginTop: 10,
         fontSize: 14,
         color: '#838383'
-        }
+        },
+    titledate: {
+        flexDirection: 'row', 
+        },
+    date: {
+        color: 'red',
+        right: 0,
+        top: 3
+    }, 
+    delete: {
+        position: 'absolute',
+        right: 20,
+        bottom: 10
+
+    },
+    player: {
+        color: 'green',
+        top: 10
+    }
+
 });
 

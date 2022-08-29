@@ -97,8 +97,8 @@ export default function AddTask ({navigation}) {
                     format="DD-MM-YYYY"
                     minDate="01-01-2022"
                     maxDate="01-01-2030"
-                    confirmBtnText="Confirm"
-                    cancelBtnText="Cancel"
+                    confirmBtnText="Выбрать"
+                    cancelBtnText="Выйти"
                     customStyles={{
                         dateIcon: {
                         display: 'none',
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         padding: 20,
       },
       datePickerStyle: {
-        width: 200,
+        width: '100%',
         marginTop: 20,
       },
     });

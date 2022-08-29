@@ -19,9 +19,21 @@ const styles = StyleSheet.create({
       paddingBottom: 5,
       borderBottomWidth: 1,
       borderColor: 'grey',
+      shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 2,
+},
+shadowOpacity: 0.23,
+shadowRadius: 2.62,
+
+elevation: 4,
     },
 
     text: {
-      fontSize: 18
+      fontSize: 18,
+      fontWeight: "bold"
     }
   });
+
+  
