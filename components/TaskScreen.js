@@ -34,7 +34,7 @@ export default function TaskScreen ({navigation}) {
             <View>
                 <FlatList style={styles.containerTask}
                         data={task} renderItem ={({item}) => (
-                           <Task item={item}/>
+                           <Task item={item} task={task}/>
                         )} 
                         keyExtractor={(item, index) => index.toString()}  />
                 <Pressable  style={styles.bodyAdd}

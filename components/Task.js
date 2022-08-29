@@ -1,12 +1,25 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { setTaskID } from '../redux/actions';
+import { setTask, setTaskID } from '../redux/actions';
 import React from 'react'
 import { useDispatch} from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Task(props) {
     const dispatch = useDispatch ();
     const navigation = useNavigation(); 
+
+
+const onRemove = (id) => {
+    const filteredTask = props.task.filter(task => task.ID !== id);
+    AsyncStorage.setItem('Task', JSON.stringify(filteredTask))   
+    .then(() => {
+        dispatch(setTask(filteredTask));
+    })
+    .catch(err=>console.log(err))
+}
+
+
   return (
     <View style={styles.container}>
        <TouchableOpacity
@@ -26,6 +39,10 @@ export default function Task(props) {
             <Text style={styles.text}>
                 {props.item.Date}
             </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => {onRemove(props.item.ID) }}>
+            <Text>Delete</Text>
         </TouchableOpacity>
     </View>
   )
@@ -62,21 +79,3 @@ const styles = StyleSheet.create({
         }
 });
 
-
-/*
-
-    return(
-        <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => {todo.id}}
-            onLongPress = {onRemove.bind(null, todo.id)}>
-            <View style={styles.container}>
-                <Text> {todo.title}</Text>
-                <Text  style={styles.active}> {todo.active}</Text>
-            </View>
-        </TouchableOpacity>
-    );
-}
-
-
-*/
