@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { Alert, StyleSheet, Button, View, TextInput, SafeAreaView } from 'react-native';
 import {setTask} from '../redux/actions';
@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DatePicker from 'react-native-datepicker';
 
 
-export default function AddTask (navigation) {
+export default function AddTask ({navigation}) {
     const {task, taskID} = useSelector (state => state.taskReducer);
     const dispatch = useDispatch ();
 
@@ -16,8 +16,19 @@ export default function AddTask (navigation) {
     const [player, setPlayer] = useState ('')
     const [date, setDate] = useState('');
 
+    const getTask = () => {
+        const Task = task.find(task => task.ID === taskID)
+        if (Task) {
+            setTitle(Task.Title);
+            setComment(Task.Comment);
+            setPlayer(Task.Player);
+            setDate(Task.Date);
+        }
+    }
 
-
+    useEffect (() => {
+        getTask();
+    }, [])
 
     const setTasks = () => {
         if (title.length == 0) {
@@ -29,9 +40,16 @@ export default function AddTask (navigation) {
                     Title: title, 
                     Comment: comment,
                     Player: player,
-                    Date: date
+                    Date: date,
                 }
-                let newTask = [...task, Task];
+                const index = task.findIndex(task => task.ID === taskID);
+                let newTask = [];
+                if (index > -1) {
+                    newTask = [...task];
+                    newTask[index] = Task;
+                } else {
+                    newTask = [...task, Task];
+                }
                 AsyncStorage.setItem('Task', JSON.stringify(newTask))
                     .then(() => {
                         dispatch(setTask(newTask));
@@ -44,6 +62,7 @@ export default function AddTask (navigation) {
             }
         }
     }
+    
 
     return(
         <View style={styles.container}>

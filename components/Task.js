@@ -1,10 +1,19 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { setTaskID } from '../redux/actions';
 import React from 'react'
+import { useDispatch} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Task(props) {
+    const dispatch = useDispatch ();
+    const navigation = useNavigation(); 
   return (
     <View style={styles.container}>
-       <TouchableOpacity>
+       <TouchableOpacity
+       onPress={()=> {
+        dispatch(setTaskID(props.item.ID));
+        navigation.navigate('AddTask');
+       }}>
             <Text style={styles.title}>
                 {props.item.Title}
             </Text>

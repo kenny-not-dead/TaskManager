@@ -35,7 +35,8 @@ export default function TaskScreen ({navigation}) {
                 <FlatList style={styles.containerTask}
                         data={task} renderItem ={({item}) => (
                            <Task item={item}/>
-                        )} />
+                        )} 
+                        keyExtractor={(item, index) => index.toString()}  />
                 <Pressable  style={styles.bodyAdd}
                    onPress={() => {
                     dispatch(setTaskID(task.length + 1 ))
