@@ -9,11 +9,13 @@ import { setTask, setTaskID } from '../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 import Task from './Task';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 export default function TaskScreen ({navigation}) {
     
     const {task} = useSelector (state => state.taskReducer);
     const dispatch = useDispatch ();
+
 
     useEffect ( () => {
         getTask();
@@ -42,7 +44,12 @@ export default function TaskScreen ({navigation}) {
                     dispatch(setTaskID(task.length + 1 ))
                     navigation.navigate('AddTask');
                    }}>
-                  <Text style={styles.add}> + </Text>
+                  <View style={styles.add}>
+                    <FontAwesome5
+                      name={'plus'}
+                      size={20}
+                      color={'#ffffff'}/> 
+                  </View>
                 </Pressable>
             </View>
       )
@@ -50,24 +57,32 @@ export default function TaskScreen ({navigation}) {
     
 const styles = StyleSheet.create({
     containerTask: {
-        height: '85%',
-        backgroundColor: '#EFEFEF'
+        height: '100%',
+    },
+
+    bodyAdd: {
+      justifyContent: 'center',
+      alignItems: 'center',
     },
 
     add: {
-      fontSize: 35,
-      color: 'white',
-      textAlign: 'center',
-    },
-  
-    bodyAdd:{
+      position: 'absolute',
       width: 50,
       height: 50,
       borderRadius: 30,
-      backgroundColor: 'grey',
+      backgroundColor: '#0080ff',
       elevation: 5,
-      margin: 10,
-      justifyContent: 'center'
-    }
+      justifyContent: 'center',
+      alignItems: 'center',
+      bottom: 10,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+        
+          }
   });
   

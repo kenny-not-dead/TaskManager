@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
       justifyContent:  'flex-end',
       paddingBottom: 5,
       borderBottomWidth: 1,
-      borderColor: 'grey',
+      borderColor: '#c0ddfa',
       shadowColor: "#000",
 shadowOffset: {
 	width: 0,
