@@ -18,8 +18,12 @@ export default function AddTask ({navigation}) {
     const [date, setDate] = useState('')
     const [done, setDone] = useState(false);
 
+    useEffect(() => {
+        getTask();
+    }, [])
+
     const getTask = () => {
-        const Task = task.find(task => task.ID === taskID)
+        const Task = task.find(task => task.ID===taskID)
         if (Task) {
             setTitle(Task.Title);
             setComment(Task.Comment);
@@ -28,10 +32,6 @@ export default function AddTask ({navigation}) {
             setDone(Task.Done);
         }
     }
-
-    useEffect (() => {
-        getTask();
-    }, [])
 
     const setTasks = () => {
         if (title.length == 0) {
@@ -46,8 +46,10 @@ export default function AddTask ({navigation}) {
                     Date: date,
                     Done: done,
                 }
+
                 const index = task.findIndex(task => task.ID === taskID);
                 let newTask = [];
+                
                 if (index > -1) {
                     newTask = [...task];
                     newTask[index] = Task;
