@@ -20,19 +20,20 @@ const styles = StyleSheet.create({
       borderBottomWidth: 1,
       borderColor: '#c0ddfa',
       shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 2,
-},
-shadowOpacity: 0.23,
-shadowRadius: 2.62,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.23,
+      shadowRadius: 2.62,
 
-elevation: 4,
-    },
+      elevation: 4,
+          },
 
     text: {
-      fontSize: 18,
-      fontWeight: "bold"
+      fontSize: 20,
+      fontWeight: "bold",
+      color: '#0080ff',
     }
   });
 

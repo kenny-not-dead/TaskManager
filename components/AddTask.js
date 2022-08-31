@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { Alert, StyleSheet, Button, View, TextInput, SafeAreaView } from 'react-native';
+import { Alert, StyleSheet, Button, View, TextInput, SafeAreaView, Text } from 'react-native';
 import {setTask} from '../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DatePicker from 'react-native-datepicker';
+import Checkbox from 'expo-checkbox';
 
 
 export default function AddTask ({navigation}) {
@@ -14,7 +15,8 @@ export default function AddTask ({navigation}) {
     const [title, setTitle] = useState ('')
     const [comment, setComment] = useState ('')
     const [player, setPlayer] = useState ('')
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState('')
+    const [done, setDone] = useState(false);
 
     const getTask = () => {
         const Task = task.find(task => task.ID === taskID)
@@ -23,6 +25,7 @@ export default function AddTask ({navigation}) {
             setComment(Task.Comment);
             setPlayer(Task.Player);
             setDate(Task.Date);
+            setDone(Task.Done);
         }
     }
 
@@ -41,6 +44,7 @@ export default function AddTask ({navigation}) {
                     Comment: comment,
                     Player: player,
                     Date: date,
+                    Done: done,
                 }
                 const index = task.findIndex(task => task.ID === taskID);
                 let newTask = [];
@@ -117,6 +121,10 @@ export default function AddTask ({navigation}) {
                     />
                 </View>
                 </SafeAreaView>
+                <View>
+                     <Checkbox value={done} onValueChange= {(newValue) => setDone(newValue)}/>
+                     <Text> Выполнено</Text>
+                </View>
             <Button style={styles.button} title ='Добавить' onPress={setTasks}/>
         </View>
     );

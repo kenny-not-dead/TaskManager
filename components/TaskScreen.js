@@ -3,7 +3,7 @@
 //import { Navbar } from './Navbar';
 //import { Task } from './Todo';
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Alert } from 'react-native';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { setTask, setTaskID } from '../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
@@ -35,7 +35,7 @@ export default function TaskScreen ({navigation}) {
       return(
             <View>
                 <FlatList style={styles.containerTask}
-                        data={task} renderItem ={({item}) => (
+                        data={task.filter(task => task.Done === false)} renderItem ={({item}) => (
                            <Task item={item} task={task}/>
                         )} 
                         keyExtractor={(item, index) => index.toString()}  />

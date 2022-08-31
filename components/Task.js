@@ -1,9 +1,10 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import { setTask, setTaskID } from '../redux/actions';
 import React from 'react'
 import { useDispatch} from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Checkbox from 'expo-checkbox';
 
 export default function Task(props) {
     const dispatch = useDispatch ();
@@ -19,6 +20,19 @@ const onRemove = (id) => {
     .catch(err=>console.log(err))
 }
 
+const checkTask = (id, newValue) => {
+    const index = props.task.findIndex (task => task.ID === id);
+    if (index > -1) {
+      let newTask = [...props.task];
+      newTask[index].Done = newValue;
+      AsyncStorage.setItem('Task', JSON.stringify(newTask))
+      .then(()=> {
+        dispatch(setTask(newTask))
+        Alert.alert('Задача выполнена!')
+      })
+      .catch(err => console.log(err))
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -28,6 +42,8 @@ const onRemove = (id) => {
         navigation.navigate('AddTask');
        }}>
             <View style={styles.titledate}>
+                <Checkbox value={props.item.Done} 
+                            onValueChange={(newValue)=> {checkTask(props.item.ID, newValue)}}/>
                 <Text style={styles.title}>
                     {props.item.Title}
                 </Text>
