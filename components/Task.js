@@ -20,6 +20,7 @@ const onRemove = (id) => {
     .catch(err=>console.log(err))
 }
 
+
 const checkTask = (id, newValue) => {
     const index = props.task.findIndex (task => task.ID === id);
     if (index > -1) {
