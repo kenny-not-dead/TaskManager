@@ -17,6 +17,7 @@ export default function AddTask ({navigation}) {
     const [player, setPlayer] = useState ('')
     const [date, setDate] = useState('')
     const [done, setDone] = useState(false);
+    const [quick, setQuick] = useState(false);
 
     useEffect(() => {
         getTask();
@@ -30,6 +31,7 @@ export default function AddTask ({navigation}) {
             setPlayer(Task.Player);
             setDate(Task.Date);
             setDone(Task.Done);
+            setQuick(Task.Quick);
         }
     }
 
@@ -45,6 +47,7 @@ export default function AddTask ({navigation}) {
                     Player: player,
                     Date: date,
                     Done: done,
+                    Quick: quick,
                 }
 
                 const index = task.findIndex(task => task.ID === taskID);
@@ -91,43 +94,44 @@ export default function AddTask ({navigation}) {
             style={styles.input}
             placeholder= "Исполнитель"
             onChangeText = {(value) => setPlayer(value)}
-            multiline
              />
-             <SafeAreaView style={styles.container}>
-                    <View style={styles.containerDate}>
-                    <DatePicker
-                    style={styles.datePickerStyle}
-                    date={date} 
-                    mode="date"
-                    placeholder="Срок исполнения"
-                    format="DD-MM-YYYY"
-                    minDate="01-01-2022"
-                    maxDate="01-01-2030"
-                    confirmBtnText="Выбрать"
-                    cancelBtnText="Выйти"
-                    customStyles={{
-                        dateIcon: {
-                        display: 'none',
-                        position: 'absolute',
-                        left: 0,
-                        top: 4,
-                        marginLeft: 0,
-                        },
-                        dateInput: {
-                        //marginLeft: 5,
-                        },
-                    }}
-                    onDateChange={(date) => {
-                        setDate(date);
-                    }}
-                    />
+                <View style ={styles.containerDateQuick} >
+                        <SafeAreaView style ={styles.width}>
+                                <View style ={styles.width1}>
+                                <DatePicker
+                                style={styles.datePickerStyle}
+                                date={date} 
+                                mode="date"
+                                placeholder="Срок исполнения"
+                                format="DD-MM-YYYY"
+                                minDate="01-01-2022"
+                                maxDate="01-01-2030"
+                                confirmBtnText="Выбрать"
+                                cancelBtnText="Выйти"
+                                customStyles={{
+                                    dateIcon: {
+                                    display: 'none',
+                                    },
+                                    dateInput: {
+                                    //marginLeft: 5,
+                                    },
+                                }}
+                                onDateChange={(date) => {
+                                    setDate(date);
+                                }}
+                                />
+                            </View>
+                            </SafeAreaView>
+                      <View style={styles.quick}>
+                            <Checkbox color={'red'} value={quick} onValueChange= {(newValue) => setQuick(newValue)}/>
+                            <Text style={styles.text}> Срочно</Text>
+                     </View>
                 </View>
-                </SafeAreaView>
-                <View>
-                     <Checkbox value={done} onValueChange= {(newValue) => setDone(newValue)}/>
-                     <Text> Выполнено</Text>
-                </View>
-            <Button style={styles.button} title ='Добавить' onPress={setTasks}/>
+        <View style={styles.done}>
+             <Checkbox color={'green'} value={done} onValueChange= {(newValue) => setDone(newValue)}/>
+             <Text style={styles.text}> Выполнено</Text>
+        </View>
+            <Button  style={styles.button} title ='Добавить' onPress={setTasks}/>
         </View>
     );
 }
@@ -135,22 +139,36 @@ export default function AddTask ({navigation}) {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'space-between',
-        padding: 20,
-    },
-    input: {
-        width: '100%',
-        borderBottomWidth: 1,
-        borderColor: 'grey',
+       justifyContent: 'space-between',
         padding: 10,
-        textAlign: 'left'
-      },
-    button: {
-        textColor: 'red'
     },
 
-    containerDate: {
+    width:{
+        width: '50%',
+    },
+
+    containerDateQuick: {
+       flexDirection: 'row',
+    },
+
+    input: {
+        width: '100%',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: 'black',
+        backgroundColor: 'white',
+        padding: 15,
+        textAlign: 'left',
+        marginBottom: 10, 
       },
+
+      quick:{
+        flexDirection: 'row',
+        marginLeft: '15%',
+        alignItems: 'center',
+        width: 60
+      },
+      
       title: {
         textAlign: 'center',
         fontSize: 20,
@@ -159,7 +177,21 @@ const styles = StyleSheet.create({
       },
       datePickerStyle: {
         width: '100%',
-        marginTop: 20,
+        backgroundColor: 'white',
+        borderWidth: 0.5,
+        borderRadius: 5,
+        borderColor: 'black',
+        backgroundColor: 'white',
       },
+      done: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 40, 
+        marginBottom: 30, 
+        width: '100%'
+      }, 
+      text:{
+        fontSize: 16,
+      }
     });
 

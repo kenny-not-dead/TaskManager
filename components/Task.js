@@ -5,6 +5,7 @@ import { useDispatch} from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Checkbox from 'expo-checkbox';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 export default function Task(props) {
     const dispatch = useDispatch ();
@@ -20,7 +21,6 @@ const onRemove = (id) => {
     .catch(err=>console.log(err))
 }
 
-
 const checkTask = (id, newValue) => {
     const index = props.task.findIndex (task => task.ID === id);
     if (index > -1) {
@@ -29,14 +29,18 @@ const checkTask = (id, newValue) => {
       AsyncStorage.setItem('Task', JSON.stringify(newTask))
       .then(()=> {
         dispatch(setTask(newTask))
-        Alert.alert('Задача выполнена!')
+        Alert.alert('Успешно!')
       })
       .catch(err => console.log(err))
     }
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[ {
+        borderColor:
+        props.item.Quick === true ? 'red': '#c0ddfa'
+    },
+    styles.container]}>
        <TouchableOpacity
        onPress={()=> {
         dispatch(setTaskID(props.item.ID));
@@ -48,7 +52,12 @@ const checkTask = (id, newValue) => {
                 <Text style={styles.title}>
                     {props.item.Title}
                 </Text>
-                <Text style={styles.date}>
+                <Text style={[
+                   {
+                    color:
+                    props.item.Quick === true ? 'red': 'black'
+                }, 
+                    styles.date]}>
                     {props.item.Date}
                 </Text>
            </View>
@@ -61,7 +70,10 @@ const checkTask = (id, newValue) => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.delete}
         onPress={() => {onRemove(props.item.ID) }}>
-            <Text >Delete</Text>
+             <FontAwesome5
+                      name={'trash'}
+                      size={18}
+                      color={'#8fa3e3'}/> 
         </TouchableOpacity>
     </View>
   )
@@ -72,9 +84,8 @@ const styles = StyleSheet.create({
         padding: 20,
         margin: 5,
         flexDirection: 'row',
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 10,
-        borderColor: '#c0ddfa',
         marginBottom: 7,
         alignItems:  'center',
         backgroundColor: 'white',
@@ -86,12 +97,14 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
         elevation: 4,
+        
         },
 
     title: {
         fontSize: 20,
-        width: '80%',
-        fontWeight: "bold"
+        width: '73%',
+        fontWeight: "bold",
+        paddingLeft: 5,
         },
 
     text: {
@@ -103,7 +116,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         },
     date: {
-        color: 'red',
         right: 0,
         top: 3
     }, 
@@ -116,7 +128,7 @@ const styles = StyleSheet.create({
     player: {
         color: 'green',
         top: 10
-    }
+    },
 
 });
 
