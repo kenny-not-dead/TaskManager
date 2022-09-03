@@ -22,10 +22,10 @@ function HomeTabs() {
         ({route}) => ({
           tabBarIcon: ({focused, size, color}) => {
             let iconName;
-            if (route.name === 'Task'){
+            if (route.name === 'Задачи'){
               iconName='clipboard-list';
               size= focused ? 25: 20;
-            } else if (route.name === 'Done') {
+            } else if (route.name === 'Архив') {
                 iconName='clipboard-check';
                 size= focused ? 25: 20;
             }
@@ -44,10 +44,10 @@ function HomeTabs() {
 
       }}
       >
-        <Tab.Screen name={'Task'} component={TaskScreen} options={{
+        <Tab.Screen name={'Задачи'} component={TaskScreen} options={{
                       header: () => null
                     }}/>
-        <Tab.Screen name={'Done'} component={Done} options={{
+        <Tab.Screen name={'Архив'} component={Done} options={{
                       header: () => null
                     }}/>
       </Tab.Navigator>
