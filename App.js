@@ -20,6 +20,7 @@ function HomeTabs() {
     <Tab.Navigator
       screenOptions={
         ({route}) => ({
+          
           tabBarIcon: ({focused, size, color}) => {
             let iconName;
             if (route.name === 'Задачи'){

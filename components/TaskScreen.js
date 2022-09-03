@@ -41,7 +41,7 @@ export default function TaskScreen ({navigation}) {
                         keyExtractor={(item, index) => index.toString()}  />
                 <Pressable  style={styles.bodyAdd}
                    onPress={() => {
-                    dispatch(setTaskID(task.length + 1 ))
+                    dispatch(setTaskID(Math.floor(Math.random() * 99999999)))
                     navigation.navigate('AddTask');
                    }}>
                   <View style={styles.add}>
